@@ -1,0 +1,54 @@
+version: 2
+
+project_name: msc
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: msc
+    main: ./cmd/msc
+    binary: msc
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+      - -X github.com/SoheilHasankhani/msc-cli/internal/version.Version={{.Version}}
+      - -X github.com/SoheilHasankhani/msc-cli/internal/version.Commit={{.ShortCommit}}
+      - -X github.com/SoheilHasankhani/msc-cli/internal/version.Date={{.Date}}
+
+archives:
+  - formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^chore:"
+      - "^ci:"
+
+release:
+  draft: false
+  prerelease: auto

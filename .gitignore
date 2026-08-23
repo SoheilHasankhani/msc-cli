@@ -1,0 +1,42 @@
+# Build artifacts
+/bin/
+/dist/
+/coverage.out
+/coverage.html
+*.coverprofile
+/build.log
+/ull
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+vendor/
+go.work
+go.work.sum
+
+# Delve / debug leftovers
+__debug_bin*
+debug
+
+# Editor / IDE (local only — see README "Editor setup")
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local env (never commit secrets)
+.env
+.env.*
+!.env.example

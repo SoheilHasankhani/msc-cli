@@ -1,0 +1,22 @@
+brand:
+  display_name: isos
+  command: isos
+git_host:
+  base_url: https://gitlab.example.com
+local_domain: isos.local
+repos:
+  - name: identity-api
+    git: sos/identity-api
+    services:
+      - compose_service: identity.api
+        path: .
+        source_port: 5000
+  - name: consultant-suite
+    git: sos/consultant-suite
+    services:
+      - compose_service: consultant
+        path: src/Services/ConsultantService/Consultant.API
+        source_port: 5020
+      - compose_service: consultant_hub
+        path: src/Services/ConsultantHubService/Consultant.SignalrHub
+        source_port: 5021

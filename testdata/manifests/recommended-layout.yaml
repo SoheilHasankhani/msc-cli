@@ -1,0 +1,18 @@
+brand:
+  display_name: isos
+  command: isos
+git_host:
+  base_url: https://gitlab.example.com
+local_domain: isos.local
+layout:
+  compose_file: compose/docker-compose.yml
+  compose_profile: standard
+  config_dir: config
+  clones_dir: local
+repos:
+  - name: doctor
+    git: sos/doctor
+    services:
+      - compose_service: doctor
+        path: src/Services/DoctorService/Doctor.API
+        source_port: 7000
